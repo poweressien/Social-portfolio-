@@ -1,7 +1,10 @@
 name: Unpack zip
 on:
+  workflow_dispatch:
   push:
-    paths: ['inwekobong-feed.zip']
+    paths:
+      - 'inwekobong-feed.zip'
+      - '.github/workflows/unpack.yml'
 permissions:
   contents: write
 jobs:
