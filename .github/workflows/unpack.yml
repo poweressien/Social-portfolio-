@@ -1,0 +1,21 @@
+name: Unpack zip
+on:
+  push:
+    paths: ['inwekobong-feed.zip']
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          [ -f inwekobong-feed.zip ] || exit 0
+          unzip -oq inwekobong-feed.zip
+          cp -a folio/. .
+          rm -rf folio inwekobong-feed.zip
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack project"
+          git push
